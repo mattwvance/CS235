@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 #include <stack>
+#include <vector>
+#include <sstream>
 
 using namespace std;
 
@@ -14,4 +16,5 @@ public:
     string postfixToInfix(string postfixExpression);
 	string postfixEvaluate(string postfixExpression);
 	string infixToPostfix(string infixExpression);
+    vector<string> expressionToString(string expression);
 };
