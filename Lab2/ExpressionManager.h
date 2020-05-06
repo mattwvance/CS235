@@ -15,6 +15,5 @@ public:
     bool isBalanced(string expression);
     string postfixToInfix(string postfixExpression);
 	string postfixEvaluate(string postfixExpression);
-	string infixToPostfix(string infixExpression);
     vector<string> expressionToString(string expression);
 };

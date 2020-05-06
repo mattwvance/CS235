@@ -1,6 +1,7 @@
 #include "ExpressionManager.h"
-// ExpressionManager() {}
-// virtual ~ExpressionManager() {}
+
+const string ERR = "invalid";
+
 bool ExpressionManager::isBalanced(string expression) {
     stack<char> parenthesesHolder;
     int index = 0;
@@ -37,17 +38,22 @@ string ExpressionManager::postfixToInfix(string postfixExpression) {
     for (int i = 0; i < tokens.size(); ++i) {
         string nextToken = tokens[i];
         if (isdigit(nextToken.at(0))) {
+            if (nextToken.find('.') != string::npos) {
+                return ERR;
+            }
             expression.push(tokens[i]);
-        } else if (nextToken.at(0) == '+' | '-' | '/' | '*' | '%') {
+        } else if (nextToken.at(0) == '+' | '-' | '/' | '*' | '%' && expression.size() >= 2) {
             rightToken = expression.top(); expression.pop();
             leftToken = expression.top(); expression.pop();
             expression.push("( " + leftToken + " " + nextToken + " " + rightToken + " )");
+        } else {
+            return ERR;
         }
     }
     if (expression.size() == 1) {
         return expression.top();
     } else {
-        return "Invalid";
+        return ERR;
     }
 };
 string ExpressionManager::postfixEvaluate(string postfixExpression) {
@@ -62,59 +68,51 @@ string ExpressionManager::postfixEvaluate(string postfixExpression) {
             int myNum = stoi(tokens[0]);
             operandHolder.push(myNum);
             tokens.erase(tokens.begin());
-        } else if (tokens[0].at(0) == '+') {
+        } else if (tokens[0].at(0) == '+' && operandHolder.size() >= 2) {
             firstToken = operandHolder.top();
             operandHolder.pop();
             secondToken = operandHolder.top();
             operandHolder.pop();
             operandHolder.push(secondToken + firstToken);
             tokens.erase(tokens.begin());
-        } else if (tokens[0].at(0) == '-') {
+        } else if (tokens[0].at(0) == '-' && operandHolder.size() >= 2) {
             firstToken = operandHolder.top();
             operandHolder.pop();
             secondToken = operandHolder.top();
             operandHolder.pop();
             operandHolder.push(secondToken - firstToken);
             tokens.erase(tokens.begin());
-        } else if (tokens[0].at(0) == '*') {
+        } else if (tokens[0].at(0) == '*' && operandHolder.size() >= 2) {
             firstToken = operandHolder.top();
             operandHolder.pop();
             secondToken = operandHolder.top();
             operandHolder.pop();
             operandHolder.push(secondToken * firstToken);
             tokens.erase(tokens.begin());
-        } else if (tokens[0].at(0) == '/') {
+        } else if (tokens[0].at(0) == '/' && operandHolder.size() >= 2) {
             firstToken = operandHolder.top();
             operandHolder.pop();
             secondToken = operandHolder.top();
             operandHolder.pop();
-            operandHolder.push(secondToken / firstToken);
-            tokens.erase(tokens.begin());
-        } else if (tokens[0].at(0) == '%') {
+            if (firstToken == 0) {
+                return ERR;
+            } else {
+                operandHolder.push(secondToken / firstToken);
+                tokens.erase(tokens.begin());
+            }
+        } else if (tokens[0].at(0) == '%' && operandHolder.size() >= 2) {
             firstToken = operandHolder.top();
             operandHolder.pop();
             secondToken = operandHolder.top();
             operandHolder.pop();
             operandHolder.push(secondToken % firstToken);
             tokens.erase(tokens.begin());
-        } else {
-            cout << "Not a valid string" << endl;
+        } else if(operandHolder.size() < 2 && !isdigit(tokens[0].at(0))) {
+            return ERR;
         }
     }
     output = to_string(operandHolder.top());
     return output;
-};
-string ExpressionManager::infixToPostfix(string infixExpression) {
-    cout << "infixToPostfix" << infixExpression << endl;
-    string postfix;
-    stack<int> operators;
-    vector<string> tokens = expressionToString(infixExpression);
-    for (int i = 0; i < tokens.size(); ++i) {
-        if (i+1 << tokens.size() && isdigit(tokens[i+1].at(0))) {
-            postfix + tokens[i] + " ";
-        }
-    }
-    return "a string";
 };
 vector<string> ExpressionManager::expressionToString(string expression) {
     stringstream ss(expression);

@@ -47,18 +47,4 @@ public:
 	* otherwise, return the correct evaluation as a string
 	*/
 	virtual string postfixEvaluate(string postfixExpression) = 0;
-
-	/*
-	* Converts an infix expression into a postfix expression
-	* and returns the postfix expression
-	*
-	* - The given infix expression will have a space between every number or operator.
-	* - The returned postfix expression must have a space between every number or operator.
-	* - Check lab requirements for what will be considered invalid.
-	*
-	* return the string "invalid" if infixExpression is not a valid infix expression.
-	* otherwise, return the correct postfix expression as a string.
-	*/
-	virtual string infixToPostfix(string infixExpression) = 0;
-
 };
