@@ -30,8 +30,6 @@ int main(int argc, char *argv[])
 	    }
     }
 
-    // This code works
-
     // map<string, vector<string>> wordmap;
     // string state = "";
     // for(vector<string>::iterator it=tokens.begin(); it !=tokens.end(); it++) {
