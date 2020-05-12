@@ -6,6 +6,9 @@
 #include <fstream>
 #include "PathfinderInterface.h"
 using namespace std;
+#define ROW_SIZE 5
+#define COL_SIZE 5
+#define LEN_SIZE 5
 
 /*
 WARNING: It is expressly forbidden to modify any part of this document, including its name
@@ -87,11 +90,9 @@ public:
 	*				A solution to the current maze, or an empty vector if none exists
 	*/
 	vector<string> solveMaze();
+	bool findPath(int x, int y, int z);
 	//-----------------------------------------------------------------------------------------
 protected:
-    const int ROW_SIZE = 5;
-    const int COL_SIZE = 5;
-    const int LEN_SIZE = 5;
     const int WALL = 0;
     const int TEMPORARY = 2;
     const int PATH = 3;
