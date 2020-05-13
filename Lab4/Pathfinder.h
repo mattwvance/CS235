@@ -16,7 +16,7 @@ WARNING: It is expressly forbidden to modify any part of this document, includin
 class Pathfinder: public PathfinderInterface
 {
 public:
-	Pathfinder() {}
+	Pathfinder() { srand(time(0)); }
 	virtual ~Pathfinder() {}
 
 	//Part 1-----------------------------------------------------------------------------------
@@ -91,6 +91,7 @@ public:
 	*/
 	vector<string> solveMaze();
 	bool findPath(int x, int y, int z);
+	void resetMaze();
 	//-----------------------------------------------------------------------------------------
 protected:
     const int WALL = 0;
