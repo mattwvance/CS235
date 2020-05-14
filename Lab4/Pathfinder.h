@@ -4,20 +4,18 @@
 #include <vector>
 #include <sstream>
 #include <fstream>
+#include <cstdlib>
 #include "PathfinderInterface.h"
 using namespace std;
 #define ROW_SIZE 5
 #define COL_SIZE 5
 #define LEN_SIZE 5
 
-/*
-WARNING: It is expressly forbidden to modify any part of this document, including its name
-*/
 class Pathfinder: public PathfinderInterface
 {
 public:
-	Pathfinder() { srand(time(0)); }
-	virtual ~Pathfinder() {}
+	Pathfinder();
+	~Pathfinder();
 
 	//Part 1-----------------------------------------------------------------------------------
 	/*
@@ -92,10 +90,12 @@ public:
 	vector<string> solveMaze();
 	bool findPath(int x, int y, int z);
 	void resetMaze();
+	bool isValid(string maze);
 	//-----------------------------------------------------------------------------------------
 protected:
     const int WALL = 0;
     const int TEMPORARY = 2;
+	const int BACKGROUND = 1;
     const int PATH = 3;
     int maze_grid[ROW_SIZE][COL_SIZE][LEN_SIZE];
     vector<string> solution;

@@ -1,5 +1,20 @@
 #include "Pathfinder.h"
 
+Pathfinder::Pathfinder() {
+    srand(time(0));
+    for (int row = 0; row < ROW_SIZE; ++row) {
+        for (int col = 0; col < COL_SIZE; ++col) {
+            for (int len = 0; len < LEN_SIZE; ++len) {
+                maze_grid[row][col][len] = BACKGROUND;
+            }
+        }
+    }
+};
+
+Pathfinder::~Pathfinder() {
+
+};
+
 string Pathfinder::toString() const {
     stringstream ss;
     for (int row = 0; row < ROW_SIZE; ++row) {
@@ -34,10 +49,17 @@ void Pathfinder::createRandomMaze() {
 
 bool Pathfinder::importMaze(string file_name) {
     cout << "importMaze from " << file_name << endl;
-    ifstream file (file_name.c_str());
+    ifstream file(file_name.c_str());
+    ifstream fileCheck(file_name.c_str());
+    stringstream buffer;
+    buffer << fileCheck.rdbuf();
+    string maze = buffer.str();
+    cout << maze.size();
+    if (!isValid(maze)) {
+        return false;
+    }
     if (file.is_open()) {
         string line;
-        int row_count = 0;
         for (int row = 0; row < ROW_SIZE; ++row) {
             for (int col = 0; col < COL_SIZE; ++col) {
                 getline(file, line);
@@ -49,52 +71,56 @@ bool Pathfinder::importMaze(string file_name) {
                 for (int len = 0; len < LEN_SIZE; ++len) {
                     int value;
                     ss >> value;
-                    cout << value << endl;
+                    if(value > 1 || value < 0) {
+                        return false;
+                    }
                     //cout << "[" << row << "][" << col << "][" << len << "]" << value << endl;
                     maze_grid[row][col][len] = value;
                 }
             }
         }
+    } else {
+        return false;
+    } if (!isValid(maze)) {
+        return false;
     }
     return true;
 };
 	
 vector<string> Pathfinder::solveMaze() {
-    for (int row = 0; row < ROW_SIZE; ++row)
-    {
-        // getline(file, line);
-        // stringstream ss(line);
-        for (int col = 0; col < COL_SIZE; ++col)
-        {
-            for (int len = 0; len < LEN_SIZE; ++len)
-            {
-                findPath(row, col, len);
-            }
-        }
-    }
+    solution.clear();
+    findPath(0, 0, 0);
     resetMaze();
-    for (int i = 0; i < solution.size(); ++ i) {
-        cout << solution[i] << endl;
-    }
     return solution;
 };
 
 bool Pathfinder::findPath(int x, int y, int z) {
-    solution.push_back("(x, y, z)");
-    if (x > ROW_SIZE || x < 0 || y > COL_SIZE || y < 0 || z > LEN_SIZE || y < 0 || maze_grid[x][y][z] != 1) {
+    solution.push_back("(" + to_string(x) + ", " + to_string(y) + ", " + to_string(z) + ")");
+    if (x >= ROW_SIZE || x < WALL || y >= COL_SIZE || y < WALL || z >= LEN_SIZE || z < WALL) {
         solution.pop_back();
         return false;
-    }
-    if (x == ROW_SIZE && y == COL_SIZE && z == LEN_SIZE) {
-        return true;
-    }
-    maze_grid[x][y][z] = 2;
-    if (findPath(x + 1, y, z) || findPath(x - 1, y, z) || findPath(x, y + 1, z) ||
-        findPath(x, y - 1, z) || findPath(x, y, z + 1) || findPath(x, y, z - 1)) {
+    } else if (maze_grid[x][y][z] != BACKGROUND) {
+        solution.pop_back();
+        return false;
+    } else if (x == ROW_SIZE - 1 && y == COL_SIZE - 1 && z == LEN_SIZE - 1) {
+        cout << maze_grid[x][y][z] << " here";
+        maze_grid[x][y][z] = PATH;
+        //solution.push_back("(" + to_string(x) + ", " + to_string(y) + ", " + to_string(z) + ")");
         return true;
     } else {
-        solution.pop_back();
-        return false;
+        cout << maze_grid[x][y][z] << " ";
+        //solution.push_back("(" + to_string(x) + ", " + to_string(y) + ", " + to_string(z) + ")");
+        maze_grid[x][y][z] = PATH;
+        if (findPath(x - 1, y, z) || findPath(x + 1, y, z) || findPath(x, y - 1, z) ||
+            findPath(x, y + 1, z) || findPath(x, y, z - 1) || findPath(x, y, z + 1)) {
+            //cout << "here" << " " << endl;
+            //solution.push_back("(" + to_string(x) + ", " + to_string(y) + ", " + to_string(z) + ")");
+            return true;
+        } else {
+            solution.pop_back();
+            maze_grid[x][y][z] = TEMPORARY;
+            return false;
+        }
     }
 };
 
@@ -102,10 +128,27 @@ void Pathfinder::resetMaze() {
     for (int row = 0; row < ROW_SIZE; ++row) {
         for (int col = 0; col < COL_SIZE; ++col) {
             for (int len = 0; len < LEN_SIZE; ++len) {
-                if (maze_grid[row][col][len] == 2) {
+                if (maze_grid[row][col][len] != 1 && maze_grid[row][col][len] != 0) {
                     maze_grid[row][col][len] = 1;
                 }
             }
         }
     }
+};
+
+bool Pathfinder::isValid(string maze) {
+    int count = 0;
+    for (int i = 0; i < maze.length(); ++i) {
+        if (maze[i] != ' ') {
+            maze[count++] = maze[i];
+        }
+    }
+    maze[count] = '\0';
+    if (maze.size() != 253) {
+        return false;
+    } 
+    if (maze_grid[0][0][0] != 1 || maze_grid[4][4][4] != 1) {
+        return false;
+    }
+    return true;
 }
