@@ -11,9 +11,7 @@ Pathfinder::Pathfinder() {
     }
 };
 
-Pathfinder::~Pathfinder() {
-
-};
+Pathfinder::~Pathfinder() {};
 
 string Pathfinder::toString() const {
     stringstream ss;
@@ -74,7 +72,6 @@ bool Pathfinder::importMaze(string file_name) {
                     if(value > 1 || value < 0) {
                         return false;
                     }
-                    //cout << "[" << row << "][" << col << "][" << len << "]" << value << endl;
                     maze_grid[row][col][len] = value;
                 }
             }
@@ -104,15 +101,11 @@ bool Pathfinder::findPath(int maze[ROW_SIZE][COL_SIZE][LEN_SIZE], int x, int y, 
         return false;
     } else if (x == ROW_SIZE - 1 && y == COL_SIZE - 1 && z == LEN_SIZE - 1) {
         maze[x][y][z] = PATH;
-        //solution.push_back("(" + to_string(x) + ", " + to_string(y) + ", " + to_string(z) + ")");
         return true;
     } else {
-        //solution.push_back("(" + to_string(x) + ", " + to_string(y) + ", " + to_string(z) + ")");
         maze[x][y][z] = TEMPORARY;
         if ((findPath(maze, x - 1, y, z) || findPath(maze, x + 1, y, z) || findPath(maze, x, y - 1, z) ||
             findPath(maze, x, y + 1, z) || findPath(maze, x, y, z - 1) || findPath(maze, x, y, z + 1)) && maze[x][y][z] != 0) {
-            //cout << "here" << " " << endl;
-            //solution.push_back("(" + to_string(x) + ", " + to_string(y) + ", " + to_string(z) + ")");
             return true;
         } else {
             solution.pop_back();

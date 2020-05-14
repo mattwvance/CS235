@@ -88,8 +88,24 @@ public:
 	*				A solution to the current maze, or an empty vector if none exists
 	*/
 	vector<string> solveMaze();
+	//-----------------------------------------------------------------------------------------
+	/* 
+	* This function is called by solve maze and solves the maze using recursion
+	*/
 	bool findPath(int maze[ROW_SIZE][COL_SIZE][LEN_SIZE], int x, int y, int z);
+	//-----------------------------------------------------------------------------------------
+	/*
+	* This functions returns the maze to its original value. The findPath function changes ones
+	* to twos or threes. Here they get changes back/
+	*/
+	//-----------------------------------------------------------------------------------------
 	void resetMaze();
+	//-----------------------------------------------------------------------------------------
+	/* 
+	* This function checks the size of the input maze and other aspects of the maze to 
+	* determine if it is valid.
+	*/
+	//-----------------------------------------------------------------------------------------
 	bool isValid(string maze);
 	//-----------------------------------------------------------------------------------------
 protected:
