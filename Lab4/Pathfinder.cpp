@@ -103,16 +103,14 @@ bool Pathfinder::findPath(int x, int y, int z) {
         solution.pop_back();
         return false;
     } else if (x == ROW_SIZE - 1 && y == COL_SIZE - 1 && z == LEN_SIZE - 1) {
-        cout << maze_grid[x][y][z] << " here";
         maze_grid[x][y][z] = PATH;
         //solution.push_back("(" + to_string(x) + ", " + to_string(y) + ", " + to_string(z) + ")");
         return true;
     } else {
-        cout << maze_grid[x][y][z] << " ";
         //solution.push_back("(" + to_string(x) + ", " + to_string(y) + ", " + to_string(z) + ")");
-        maze_grid[x][y][z] = PATH;
-        if (findPath(x - 1, y, z) || findPath(x + 1, y, z) || findPath(x, y - 1, z) ||
-            findPath(x, y + 1, z) || findPath(x, y, z - 1) || findPath(x, y, z + 1)) {
+        maze_grid[x][y][z] = TEMPORARY;
+        if ((findPath(x - 1, y, z) || findPath(x + 1, y, z) || findPath(x, y - 1, z) ||
+            findPath(x, y + 1, z) || findPath(x, y, z - 1) || findPath(x, y, z + 1)) && maze_grid[x][y][z] != 0) {
             //cout << "here" << " " << endl;
             //solution.push_back("(" + to_string(x) + ", " + to_string(y) + ", " + to_string(z) + ")");
             return true;
