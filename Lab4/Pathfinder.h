@@ -88,7 +88,7 @@ public:
 	*				A solution to the current maze, or an empty vector if none exists
 	*/
 	vector<string> solveMaze();
-	bool findPath(int x, int y, int z);
+	bool findPath(int maze[ROW_SIZE][COL_SIZE][LEN_SIZE], int x, int y, int z);
 	void resetMaze();
 	bool isValid(string maze);
 	//-----------------------------------------------------------------------------------------

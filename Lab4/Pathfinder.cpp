@@ -89,34 +89,34 @@ bool Pathfinder::importMaze(string file_name) {
 	
 vector<string> Pathfinder::solveMaze() {
     solution.clear();
-    findPath(0, 0, 0);
+    findPath(maze_grid, 0, 0, 0);
     resetMaze();
     return solution;
 };
 
-bool Pathfinder::findPath(int x, int y, int z) {
-    solution.push_back("(" + to_string(x) + ", " + to_string(y) + ", " + to_string(z) + ")");
+bool Pathfinder::findPath(int maze[ROW_SIZE][COL_SIZE][LEN_SIZE], int x, int y, int z) {
+    solution.push_back("(" + to_string(z) + ", " + to_string(y) + ", " + to_string(x) + ")");
     if (x >= ROW_SIZE || x < WALL || y >= COL_SIZE || y < WALL || z >= LEN_SIZE || z < WALL) {
         solution.pop_back();
         return false;
-    } else if (maze_grid[x][y][z] != BACKGROUND) {
+    } else if (maze[x][y][z] != BACKGROUND) {
         solution.pop_back();
         return false;
     } else if (x == ROW_SIZE - 1 && y == COL_SIZE - 1 && z == LEN_SIZE - 1) {
-        maze_grid[x][y][z] = PATH;
+        maze[x][y][z] = PATH;
         //solution.push_back("(" + to_string(x) + ", " + to_string(y) + ", " + to_string(z) + ")");
         return true;
     } else {
         //solution.push_back("(" + to_string(x) + ", " + to_string(y) + ", " + to_string(z) + ")");
-        maze_grid[x][y][z] = TEMPORARY;
-        if ((findPath(x - 1, y, z) || findPath(x + 1, y, z) || findPath(x, y - 1, z) ||
-            findPath(x, y + 1, z) || findPath(x, y, z - 1) || findPath(x, y, z + 1)) && maze_grid[x][y][z] != 0) {
+        maze[x][y][z] = TEMPORARY;
+        if ((findPath(maze, x - 1, y, z) || findPath(maze, x + 1, y, z) || findPath(maze, x, y - 1, z) ||
+            findPath(maze, x, y + 1, z) || findPath(maze, x, y, z - 1) || findPath(maze, x, y, z + 1)) && maze[x][y][z] != 0) {
             //cout << "here" << " " << endl;
             //solution.push_back("(" + to_string(x) + ", " + to_string(y) + ", " + to_string(z) + ")");
             return true;
         } else {
             solution.pop_back();
-            maze_grid[x][y][z] = TEMPORARY;
+            maze[x][y][z] = TEMPORARY;
             return false;
         }
     }
