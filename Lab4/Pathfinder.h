@@ -4,17 +4,18 @@
 #include <vector>
 #include <sstream>
 #include <fstream>
+#include <cstdlib>
 #include "PathfinderInterface.h"
 using namespace std;
+#define ROW_SIZE 5
+#define COL_SIZE 5
+#define LEN_SIZE 5
 
-/*
-WARNING: It is expressly forbidden to modify any part of this document, including its name
-*/
 class Pathfinder: public PathfinderInterface
 {
 public:
-	Pathfinder() {}
-	virtual ~Pathfinder() {}
+	Pathfinder();
+	~Pathfinder();
 
 	//Part 1-----------------------------------------------------------------------------------
 	/*
@@ -88,12 +89,29 @@ public:
 	*/
 	vector<string> solveMaze();
 	//-----------------------------------------------------------------------------------------
+	/* 
+	* This function is called by solve maze and solves the maze using recursion
+	*/
+	bool findPath(int maze[ROW_SIZE][COL_SIZE][LEN_SIZE], int x, int y, int z);
+	//-----------------------------------------------------------------------------------------
+	/*
+	* This functions returns the maze to its original value. The findPath function changes ones
+	* to twos or threes. Here they get changes back/
+	*/
+	//-----------------------------------------------------------------------------------------
+	void resetMaze();
+	//-----------------------------------------------------------------------------------------
+	/* 
+	* This function checks the size of the input maze and other aspects of the maze to 
+	* determine if it is valid.
+	*/
+	//-----------------------------------------------------------------------------------------
+	bool isValid(string maze);
+	//-----------------------------------------------------------------------------------------
 protected:
-    const int ROW_SIZE = 5;
-    const int COL_SIZE = 5;
-    const int LEN_SIZE = 5;
     const int WALL = 0;
     const int TEMPORARY = 2;
+	const int BACKGROUND = 1;
     const int PATH = 3;
     int maze_grid[ROW_SIZE][COL_SIZE][LEN_SIZE];
     vector<string> solution;

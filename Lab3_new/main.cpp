@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
 
     map<list<string>, vector<string>> wordmap;
     list<string> state;
-    for (int i = 0; i < 2; ++i) {
+    for (int i = 0; i < 4; ++i) {
         state.push_back("");
     }
     for (vector<string>::iterator it=tokens.begin(); it!=tokens.end(); ++it) {
@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
         state.pop_front();
     }
     state.clear();
-    for(int i = 0; i < 2; ++i) {
+    for(int i = 0; i < 4; ++i) {
         state.push_back("");
     }
     srand(time(0));
