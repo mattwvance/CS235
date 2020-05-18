@@ -11,8 +11,6 @@ class QS: public QSInterface
 public:
 	QS() {}
 	virtual ~QS() {}
-    
-    int size;
 	/*
 	* sortAll()
 	*
@@ -123,7 +121,9 @@ public:
 	void clear();
     
 protected:
-    int qsArray[];
+    static int qsArray[];
+	static int position;
+	static int size;
 };
 
 #endif
