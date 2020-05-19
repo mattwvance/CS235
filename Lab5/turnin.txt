@@ -1,0 +1,2 @@
+createArray 5 True
+addToArray 1 True
