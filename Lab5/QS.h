@@ -119,9 +119,11 @@ public:
 	* Resets the array to an empty or NULL state.
 	*/
 	void clear();
+private:
 	int position = 0;
 	int size;
-	int *qsArray[];
+	int *qsArray = NULL;
+	bool isAvail = false;
 };
 
 #endif
