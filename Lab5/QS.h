@@ -120,8 +120,6 @@ public:
 	*/
 	void clear();
 	int qsArray[];
-
-protected:
 	int position;
 	int size;
 };
