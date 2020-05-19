@@ -73,8 +73,9 @@ void parse_instruction(std::string temp, std::ofstream &ofs, QS* aptr) {
 		ss >> valueToAdd;
 
 		cout << "val is " << valueToAdd << endl;
-
+		
 		if (aptr->addToArray(valueToAdd)) {
+			cout << "here";
 			ofs << temp << " True" << std::endl;
 		}
 		else {
