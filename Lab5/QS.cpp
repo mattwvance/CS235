@@ -1,9 +1,5 @@
 #include "QS.h"
 
-QS::QS() {};
-QS::~QS() {};
-
-
 void QS::sortAll() {
     int q;
     if (position = 0) {
@@ -18,7 +14,7 @@ int QS::medianOfThree(int first, int last) {
     int front = qsArray[first];
     int median = qsArray[middle];
     int back = qsArray[last-1];
-    if (qsArray[0] == NULL) {
+    if (qsArray[0] == 0) {
         return - 1;
     }
     if (median > front && median < back || median > back && median < front) {
@@ -70,7 +66,9 @@ int QS::getSize() const {
 
 bool QS::addToArray(int value) {
     if (position < size) {
+        cout << "here" << endl;
         qsArray[position] = value;
+        cout << "here" << endl;
         ++position;
         return true;
     } else {
@@ -91,5 +89,6 @@ bool QS::createArray(int capacity) {
 };
 
 void QS::clear() {
+    fill_n(qsArray, position, 0);
     delete [] qsArray;
 };

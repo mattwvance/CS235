@@ -1,5 +1,5 @@
 #ifndef QS_H_
-#define QSE_H_
+#define QS_H_
 
 #include <iostream>
 #include <string>
@@ -119,11 +119,11 @@ public:
 	* Resets the array to an empty or NULL state.
 	*/
 	void clear();
-    
+	int qsArray[];
+
 protected:
-    static int qsArray[];
-	static int position;
-	static int size;
+	int position;
+	int size;
 };
 
 #endif
