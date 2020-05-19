@@ -40,10 +40,12 @@ int QS::medianOfThree(int first, int last) {
 int QS::partition(int first, int last, int pivotIndex) {
     int up = first + 1;
     int down = last - 1;
+    int firstArray = qsArray[first, pivotIndex];
+    int secondArray = qsArray[pivotIndex, last];
     if (qsArray == NULL || (pivotIndex > last || pivotIndex < first) || (first < 0 || last > size -1 || first > last)) {
         return -1;
     }
-    while (1) {
+    while(up < down) {
         do {
             --down;
         } while (qsArray[down] > qsArray[pivotIndex]);
@@ -56,7 +58,7 @@ int QS::partition(int first, int last, int pivotIndex) {
             qsArray[down] = holder;
         }
     };
-    return 1;
+    return ;
 };
 
 string QS::getArray() const {
