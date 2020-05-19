@@ -10,7 +10,7 @@ class QS: public QSInterface
 {
 public:
 	QS() {}
-	virtual ~QS() {}
+	~QS() { clear(); }
 	/*
 	* sortAll()
 	*
@@ -121,7 +121,7 @@ public:
 	void clear();
 private:
 	int position = 0;
-	int size;
+	int size = 0;
 	int *qsArray = NULL;
 	bool isAvail = false;
 };
