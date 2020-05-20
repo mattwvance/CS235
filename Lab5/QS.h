@@ -20,6 +20,7 @@ public:
 	* Does nothing if the array is empty.
 	*/
 	void sortAll();
+	void quickSort(int first, int last);
 
 	/*
 	* medianOfThree()
@@ -119,6 +120,7 @@ public:
 	* Resets the array to an empty or NULL state.
 	*/
 	void clear();
+	void swapEm(int pos1, int pos2);
 private:
 	int position = 0;
 	int size = 0;

@@ -1,62 +1,74 @@
 #include "QS.h"
 
 void QS::sortAll() {
-    int q = medianOfThree(0, position);
-    partition(0, position, q);
+    if (qsArray == NULL || position == 0 || size < 2) {
+        return;
+    }
+    quickSort(0, position-1);
 };
+
+void QS::quickSort(int first, int last) {
+    //if (last == first || last - first < 2) { return; }
+    if (last - first > 1) { 
+        cout << "first input " << first << " " << last << endl;
+        int pivot = medianOfThree(first, last);
+        cout << "Before Partition " << first << " " << last << " " << pivot << " " << endl;
+        pivot = partition(first, last, pivot);
+        //if (pivot = -1) { return; }
+        cout << "After Partition " << first << " " << last << " " << pivot << " " << endl;
+        //if ()
+        quickSort(first, pivot-1);
+        quickSort(pivot+1, last);
+        for (int i = 1; i < position-1; ++i) {
+            if (qsArray[i] < qsArray[i-1]) {
+                swapEm(i, (i-1));
+            }
+        }
+    }
+}
 
 int QS::medianOfThree(int first, int last) {
     int middle = (first + last) / 2;
-    int front = qsArray[first];
-    int median = qsArray[middle];
-    int back = qsArray[last];
-    if (size == 0 || first + last < 2) {
+    if (position == 0 || (first + last) < 2 || qsArray == NULL || size == 0 || position <= last || first < 0 || first >= last) {
+        cout << first << " " << last << " " << position << " " << size << endl;
         return -1;
     }
-    if (median < front) {
-        int holder = qsArray[middle];
-        qsArray[middle] = qsArray[first];
-        qsArray[first] = holder;
-        front = median;
-        median = qsArray[middle];
+    if (qsArray[middle] < qsArray[first]) {
+        swapEm(first, middle);
     }
-    if (back < front) {
-        int holder = qsArray[last];
-        qsArray[last] = qsArray[first];
-        qsArray[first] = holder;
-        back = front;
-        front = holder;
+    if (qsArray[last] < qsArray[first]) {
+        swapEm(first, last);
     }
-    if (median > back) {
-        int holder = qsArray[last];
-        qsArray[last] = median;
-        qsArray[middle] = holder;
-        back = median;
-        median = holder;
+    if (qsArray[middle] > qsArray[last]) {
+        swapEm(middle, last);
     }
     return middle;
 };
 
 int QS::partition(int first, int last, int pivotIndex) {
-    int up = first + 1;
-    int down = last - 1;
-    if (qsArray == NULL || (pivotIndex > last || pivotIndex < first) || (first < 0 || last > size -1 || first > last)) {
+    if (qsArray == NULL || (pivotIndex > last || pivotIndex < first) || (first < 0 || last > size -1 || first > last) || position == 0 || first >= last) {
         return -1;
     }
-    while (1) {
-        do {
-            --down;
-        } while (qsArray[down] > qsArray[pivotIndex]);
-        do {
+    cout << getArray() << endl;
+    swapEm(first, pivotIndex);
+    int pivot = qsArray[first];
+    int up = first + 1;
+    int down = last;
+    do {
+         while (qsArray[up] <= pivot && up != last) {
             ++up;
-        } while (qsArray[up] < qsArray[pivotIndex]);
-        if (up < down) {
-            int holder = qsArray[up];
-            qsArray[up] = qsArray[down];
-            qsArray[down] = holder;
         }
-    };
-    return 1;
+        while (qsArray[down] > pivot && down != first) {
+            --down;
+        }
+        if (qsArray[up] < qsArray[down] || up < down) {
+            swapEm(up, down);
+        }
+    } while (up < down);
+    cout << getArray() << endl;
+    swapEm(first, down);
+    cout << getArray() << endl;
+    return down;
 };
 
 string QS::getArray() const {
@@ -94,10 +106,12 @@ bool QS::createArray(int capacity) {
         size = capacity;
         qsArray = new int[capacity];
         return true;
+    } else {
+        clear();
+        createArray(capacity);
+        return true;
     }
-    clear();
-    createArray(capacity);
-    return true;
+    return false;
 };
 
 void QS::clear() {
@@ -108,3 +122,9 @@ void QS::clear() {
     size = 0;
     position = 0;
 };
+
+void QS::swapEm(int pos1, int pos2) {
+    int holder = qsArray[pos1];
+    qsArray[pos1] = qsArray[pos2];
+    qsArray[pos2] = holder;
+}
