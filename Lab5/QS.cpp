@@ -19,7 +19,7 @@ void QS::quickSort(int first, int last) {
             }
         }
     }
-}
+};
 
 int QS::medianOfThree(int first, int last) {
     int middle = (first + last) / 2;
