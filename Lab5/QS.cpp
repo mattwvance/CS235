@@ -8,15 +8,9 @@ void QS::sortAll() {
 };
 
 void QS::quickSort(int first, int last) {
-    //if (last == first || last - first < 2) { return; }
     if (last - first > 1) { 
-        cout << "first input " << first << " " << last << endl;
         int pivot = medianOfThree(first, last);
-        cout << "Before Partition " << first << " " << last << " " << pivot << " " << endl;
         pivot = partition(first, last, pivot);
-        //if (pivot = -1) { return; }
-        cout << "After Partition " << first << " " << last << " " << pivot << " " << endl;
-        //if ()
         quickSort(first, pivot-1);
         quickSort(pivot+1, last);
         for (int i = 1; i < position-1; ++i) {
@@ -49,7 +43,6 @@ int QS::partition(int first, int last, int pivotIndex) {
     if (qsArray == NULL || (pivotIndex > last || pivotIndex < first) || (first < 0 || last > size -1 || first > last) || position == 0 || first >= last) {
         return -1;
     }
-    cout << getArray() << endl;
     swapEm(first, pivotIndex);
     int pivot = qsArray[first];
     int up = first + 1;
@@ -65,9 +58,7 @@ int QS::partition(int first, int last, int pivotIndex) {
             swapEm(up, down);
         }
     } while (up < down);
-    cout << getArray() << endl;
     swapEm(first, down);
-    cout << getArray() << endl;
     return down;
 };
 
