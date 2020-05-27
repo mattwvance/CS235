@@ -1,7 +1,9 @@
 #pragma once
+#include <iostream>
 #include <string>
 #include "LinkedListInterface.h"
 #include "Node.h"
+#include <sstream>
 
 using namespace std;
 
@@ -13,7 +15,7 @@ public:
     Node<T>* head;
 
     LinkedList(){ head = NULL; };
-    ~LinkedList(){};
+    ~LinkedList(){ this->clear(); };
 
     /*
         checks that there isn't a duplicate in the list
@@ -100,14 +102,39 @@ public:
 
 	The list may or may not include a node with the given value.
 	*/
-    void remove(T value) {};
+    void remove(T value) {
+        Node<T>* node = head;
+        Node<T>* bad = head;
+        if (head == NULL) { return; }
+        if (head->data == value) {
+            head = node->next;
+            delete node;
+            return;
+        }
+        while (node->next != NULL) {
+            if(node->next->data == value) {
+                bad = node->next;
+                node->next = bad->next;
+                bad->next = NULL;
+                delete bad;
+                return;
+            }
+            node = node->next;
+        }
+    };
 
     /*
 	clear
 
 	Remove all nodes from the list.
 	*/
-    void clear() {};
+    void clear() {
+        while (head != NULL) {
+            Node<T>* node = head->next;
+            delete head;
+            head = node;
+        }
+    };
 
     /*
 	at
@@ -118,8 +145,8 @@ public:
 	If the given index is out of range of the list, throw an out of range exception.
 	*/
     T at(int index) {
-        if (index >= size() || index < 0) {
-            return NULL;
+        if (index >= this->size() || index < 0) {
+            throw std::out_of_range("index");
         } else {
             Node<T>* node = head;
             int j = 0;
@@ -158,6 +185,19 @@ public:
 	"1 2 3 4 5"
 	*/
     string toString() { 
-        return "";
+        Node<T> *node = head;
+        stringstream ss;
+        string list;
+        while (node != NULL) {
+            cout << node->data << " ";
+            if (node->next == NULL) {
+                ss << node->data;
+            } else {
+                ss << node->data << " ";
+            }
+            node = node->next;
+        }
+        list = ss.str();
+        return list;
     };
 };

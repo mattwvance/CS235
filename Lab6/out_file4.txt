@@ -5,22 +5,22 @@ insertTail Coming
 insertTail front
 size 3
 printList
-  
+  Combing Coming front
 remove front
-size 3
+size 2
 printList
-  
+  Combing Coming
 insertTail back
 insertTail to
 insertTail where
 remove where
-size 6
+size 4
 printList
-  
+  Combing Coming back to
 insertTail where
-size 6
+size 5
 printList
-  
+  Combing Coming back to where
 insertTail you
 insertTail started
 insertTail is
@@ -33,22 +33,22 @@ insertTail leavening.
 insertTail leaving.
 insertTail -Terry
 insertTail Pratchett
-size 18
+size 17
 printList
-  
+  Combing Coming back to where you started is not the same as never leavening. leaving. -Terry Pratchett
 remove Combing
 remove leavening.
 remove computerviruses
-size 18
+size 15
 printList
-  
+  Coming back to where you started is not the same as never leaving. -Terry Pratchett
 clear
-size 18
+size 0
 printList
   
 clear
 remove "string"
 remove -Terry
-size 18
+size 0
 printList
   
