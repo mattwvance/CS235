@@ -1,0 +1,117 @@
+out_file1.txt
+  1 2 3							      |	  
+  0 1 2 3 4						      |	  
+out_file2.txt
+at 0 out_of_range					      <
+at 1 out_of_range					      <
+  lazy							      |	  
+  lazy							      |	  
+  lazy							      |	  
+  lazy dog.						      |	  
+  lazy dog.						      |	  
+  fox lazy dog.						      |	  
+  brown fox lazy dog.					      |	  
+  quick brown fox lazy dog.				      |	  
+  The quick brown fox lazy dog.				      |	  
+  The quick brown fox lazy dog.				      |	  
+  The quick brown fox lazy dog.				      |	  
+  The quick brown fox the lazy dog.			      |	  
+  The quick brown fox jumps the lazy dog.		      |	  
+  The quick brown fox jumps over the lazy dog.		      |	  
+  The quick brown fox jumps over the lazy dog.		      |	  
+at 9 out_of_range					      <
+at -1 out_of_range					      <
+out_file3.txt
+  0 9999 1 -1 2 3 4 5 6 7 8 9 10 12			      |	  
+size  13						      |	size  14
+  0 9999 1 2 3 4 5 6 7 8 9 10 12			      |	  
+size  13						      |	size  14
+  0 9999 1 2 3 4 5 6 7 8 9 10 12			      |	  
+size 13							      |	size 14
+  0 9999 1 2 3 4 5 6 7 8 9 10 12			      |	  
+size  12						      |	size  14
+  0 1 2 3 4 5 6 7 8 9 10 12				      |	  
+size 11							      |	size 14
+  0 1 2 3 4 5 6 7 8 9 12				      |	  
+size 10							      |	size 14
+  1 2 3 4 5 6 7 8 9 12					      |	  
+size 0							      |	size 14
+size 0							      |	size 14
+out_file4.txt
+  Combing Coming front					      |	  
+size 2							      |	size 3
+  Combing Coming					      |	  
+size 4							      |	size 6
+  Combing Coming back to				      |	  
+size 5							      |	size 6
+  Combing Coming back to where				      |	  
+size 17							      |	size 18
+  Combing Coming back to where you started is not the same as |	  
+size 15							      |	size 18
+  Coming back to where you started is not the same as never l |	  
+size 0							      |	size 18
+size 0							      |	size 18
+out_file5.txt
+  so,							      |	  
+size 11							      |	size 12
+  kingdom ``Annabel So me, men ```of killing `my ``````was `a |	  
+size 21							      |	size 24
+  By kingdom other `she `kingdom reason ``Annabel So from me, |	  
+size 31							      |	size 36
+  By 1849 kingdom ``a other `she `In But reason ``Annabel So  |	  
+size 31							      |	size 37
+  By 1849 kingdom ``a with other `she `In But reason ``Annabe |	  
+size 41							      |	size 49
+  By 1849 kingdom ``a with other ``and `she But `I `Annabel ` |	  
+size 51							      |	size 60
+  By 1849 many kingdom by That ``a this with other ``and `she |	  
+size 61							      |	size 70
+  By 1849 many `many kingdom by That ``a this with other ``an |	  
+size 71							      |	size 81
+  By 1849 It many `many kingdom by sea, That ``a know this wi |	  
+size 71							      |	size 82
+  By 1849 It many `many kingdom by sea, That ``a know this wi |	  
+size 81							      |	size 93
+  By 1849 It many `many kingdom by sea, That ``a there know L |	  
+size 91							      |	size 103
+  By 1849 It many `many kingdom by sea, That ``a there know L |	  
+size 101						      |	size 113
+  By 1849 It many `many kingdom by sea, That ``a there know L |	  
+size 111						      |	size 125
+  By Edgar 1849 It many `many kingdom by sea, That ``a maiden |	  
+size 111						      |	size 126
+  By Edgar 1849 It many and `many kingdom by sea, That ``a ma |	  
+size 121						      |	size 134
+  By Edgar 1849 It many and `many a In kingdom by sea, That ` |	  
+size 131						      |	size 148
+  By Edgar 1849 It was many and `many a In by sea, That ``a m |	  
+size 141						      |	size 158
+  By Edgar 1849 It was many and `many a In by sea, That ``a m |	  
+size 151						      |	size 167
+  By Edgar 1849 It was many and `many a In by sea, That ``a m |	  
+size 161						      |	size 176
+  By Edgar Poe 1849 It was many and `many a In by sea, That ` |	  
+size 171						      |	size 187
+  By Edgar Allen Poe 1849 It was many and `many a In by sea,  |	  
+size 181						      |	size 196
+  By Edgar Allen Poe 1849 It was many and `many a ago, In kin |	  
+size 191						      |	size 206
+  By Edgar Allen Poe 1849 It was many and `many a year ago, I |	  
+size 201						      |	size 215
+  By Edgar Allen Poe 1849 It was many and `many a year ago, I |	  
+size 211						      |	size 226
+  By Edgar Allen Poe 1849 It was many and `many a year ago, I |	  
+size 221						      |	size 235
+  By Edgar Allen Poe 1849 It was many and `many a year ago, I |	  
+size 231						      |	size 244
+  By Allen Poe 1849 It was many and `many a year ago, In king |	  
+size 241						      |	size 254
+  By Allen Poe 1849 It was many and `many a year ago, In `a k |	  
+size 241						      |	size 255
+  By Allen Poe 1849 It was many and `many a year ago, In `a k |	  
+size 251						      |	size 265
+  By Allen Poe 1849 It was many and `many a year ago, In `a k |	  
+size 261						      |	size 273
+  By Edgar Allen Poe 1849 It was many and `many a year ago, I |	  
+size 271						      |	size 282
+  By Edgar Allen Poe 1849 It was many and `many a year ago, I |	  
