@@ -5,32 +5,46 @@
 
 class Node: public NodeInterface
 {
-
+	friend class BST;
 public:
-    int data;
-    Node* left;
-    Node* right;
-    Node(int value, Node *leftChild = NULL, Node *rightChild = NULL) {}
-    virtual ~Node() {}
+    Node(int value);
+    virtual ~Node();
 
     /*
 	* Returns the data that is stored in this node
 	*
 	* @return the data that is stored in this node.
 	*/
-    int getData() const {};
+    int getData() const;
 
     /*
 	* Returns the left child of this node or null if it doesn't have one.
 	*
 	* @return the left child of this node or null if it doesn't have one.
 	*/
-    Node* getLeftChild() const {};
+    Node* getLeftChild() const;
 
     /*
 	* Returns the right child of this node or null if it doesn't have one.
 	*
 	* @return the right child of this node or null if it doesn't have one.
 	*/
-    Node* getRightChild() const {};
+    Node* getRightChild() const;
+	/*
+	* Sets the right child
+	*/
+	void setRightChild(Node* ptr);
+	/*
+	* Sets the left child
+	*/
+	void setLeftChild(Node* ptr);
+	/*
+	* sets data value
+	*/
+	void setData(int val);
+
+protected:
+	int data;
+	Node *leftChild;
+	Node *rightChild;
 };

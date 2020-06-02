@@ -1,9 +1,9 @@
 #include "Node.h"
 
-Node::Node(int value, Node* leftChild = NULL, Node* rightChild = NULL) {
+Node::Node(int value) {
     data = value;
-    left = leftChild;
-    right = rightChild;
+    leftChild = NULL;
+    rightChild = NULL;
 };
 
 Node::~Node() {};
@@ -13,11 +13,23 @@ int Node::getData() const {
 };
 
 Node* Node::getLeftChild() const {
-    if (left == NULL) { return NULL; }
-    else { return left; }
+    if (leftChild == NULL) { return NULL; }
+    else { return leftChild; }
 };
 
-Node* Node::getRightChild() const {
-    if (right == NULL) { return NULL; }
-    else { return right; }
+Node * Node::getRightChild() const {
+    if (rightChild == NULL) { return NULL; }
+    else { return rightChild; }
 };
+
+void Node::setRightChild(Node* ptr) {
+    rightChild = ptr;
+};
+
+void Node::setLeftChild(Node* ptr) {
+    leftChild = ptr;
+};
+
+void Node::setData(int val) {
+    data = val;
+}
