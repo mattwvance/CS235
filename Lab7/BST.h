@@ -57,6 +57,10 @@ public:
 	*/
     void clear();
     /*
+    * clears the entire tree
+    */
+    void recursiveClear(Node* root);
+    /*
     * Determines if the value is already in the BST
     */
     bool exists(int val);

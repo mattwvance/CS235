@@ -30,6 +30,7 @@ bool BST::add(const int data) {
 
 bool BST::recursiveAdd(Node* &node, const int val) {
     if (node == NULL) {
+        treeSize++;
         node = new Node(val);
         return true; 
     } else if (node->getData() == val) {
@@ -49,6 +50,7 @@ bool BST::recursiveRemove(Node*& node, int val) {
     if (node == NULL || node->getData() == NULL) {
         return false;
     } else if (node->getData() == val) {
+        treeSize--;
         Node* check = node->leftChild;
         if (node->leftChild == NULL && node->rightChild == NULL) {
             delete node;
@@ -86,11 +88,16 @@ Node* BST::findRightMost(Node*& check) {
 };
 
 void BST::clear() {
-    do {
-        if (root->data) {
-            remove(root->data);
-        }
-    } while (root != NULL);
+    recursiveClear(this->root);
+    root = NULL;
+    delete root;
+};
+
+void BST::recursiveClear(Node* root) {
+    if (root != NULL) {
+        recursiveClear(root->getLeftChild());
+        recursiveClear(root->getRightChild());
+    }
 };
 
 bool BST::checkExists(Node *node, int val) const {
