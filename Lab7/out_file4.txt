@@ -137,3 +137,4 @@ PrintBST
 6:  10 
 
 Remove 2 True
+Remove 8 True

@@ -2,19 +2,7 @@
 #include <iostream>
 
 using namespace std;
-
 int treeSize = 0;
-
-void BST::inOrder(Node* node, Node*& parent) {
-    if (node == NULL && parent->rightChild == NULL) {
-        parent == NULL;
-        return;
-    }
-    Node *temp = findRightMost(node);
-    int tData = parent->getData();
-    parent->setData(temp->data);
-    temp->setData(tData);
-};
 
 Node * BST::getRootNode() const {
     return root;
@@ -84,6 +72,19 @@ bool BST::recursiveRemove(Node*& node, int val) {
     } 
 };
 
+void BST::inOrder(Node *node, Node *&parent)
+{
+    if (node == NULL && parent->rightChild == NULL)
+    {
+        parent == NULL;
+        return;
+    }
+    Node *temp = findRightMost(node);
+    int tData = parent->getData();
+    parent->setData(temp->data);
+    temp->setData(tData);
+};
+
 Node* BST::findRightMost(Node*& check) {
     while(check->getRightChild()) {
         check = check->getRightChild();
@@ -101,15 +102,5 @@ void BST::recursiveClear(Node* root) {
     if (root != NULL) {
         recursiveClear(root->getLeftChild());
         recursiveClear(root->getRightChild());
-    }
-};
-
-bool BST::checkExists(Node *node, int val) const {
-    if (node == NULL) { return false; }
-    else if (node->getData() == val) { return true; }
-    else if (val < node->getData()) {
-        checkExists(node->getLeftChild(), val);
-    } else if(val > node->getData()) {
-        checkExists(node->getRightChild(), val);
     }
 };

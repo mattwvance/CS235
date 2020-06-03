@@ -60,15 +60,6 @@ public:
     * clears the entire tree
     */
     void recursiveClear(Node* root);
-    /*
-    * Determines if the value is already in the BST
-    */
-    bool exists(int val);
-    /*
-    * Checks that the value isn't already in the BST by searching recursively
-    * in order
-    */
-    bool checkExists(Node *node, int val) const;
 
 protected:
     Node *root;
