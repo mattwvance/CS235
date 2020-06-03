@@ -10,10 +10,10 @@ void BST::inOrder(Node* node, Node*& parent) {
         parent == NULL;
         return;
     }
-    Node* temp = findRightMost(node);
-    int tData = parent->data;
-    parent->data = temp->data;
-    temp->data = tData;
+    Node *temp = findRightMost(node);
+    int tData = parent->getData();
+    parent->setData(temp->data);
+    temp->setData(tData);
 };
 
 Node * BST::getRootNode() const {
@@ -49,26 +49,30 @@ bool BST::remove(int data) {
 bool BST::recursiveRemove(Node*& node, int val) {
     if (node == NULL || node->getData() == NULL) {
         return false;
-    } else if (node->getData() == val) {
-        treeSize--;
-        Node* check = node->leftChild;
-        if (node->leftChild == NULL && node->rightChild == NULL) {
+    } else if (node->data == val) {
+        Node* check = NULL;
+        if (node->getLeftChild()) {
+            check = node->leftChild;
+        }
+        if (check == NULL && node->getRightChild() == NULL) {
+            treeSize--;
             delete node;
             node = NULL;
             return true;
-        } else if (check && node->rightChild) {
+        } else if (check && node->getRightChild()) {
             inOrder(check, node);
             recursiveRemove(check, val);
-            return true;
         } else if (check != NULL) {
+            treeSize--;
             Node* temp = node;
-            node = node->leftChild;
+            node = node->getLeftChild();
             delete temp;
             temp = NULL;
             return true;
         } else if (check == NULL) {
+            treeSize--;
             Node* temp = node;
-            node = node->rightChild;
+            node = node->getRightChild();
             delete temp;
             temp = NULL;
             return true;
@@ -81,8 +85,8 @@ bool BST::recursiveRemove(Node*& node, int val) {
 };
 
 Node* BST::findRightMost(Node*& check) {
-    while(check->rightChild != NULL) {
-        check = check->rightChild;
+    while(check->getRightChild()) {
+        check = check->getRightChild();
     }
     return check;
 };
@@ -109,7 +113,3 @@ bool BST::checkExists(Node *node, int val) const {
         checkExists(node->getRightChild(), val);
     }
 };
-// string BST::BSTtoString(BST* tree) const {
-//     cout << "Print BST" << endl;
-//     return " ";
-// };

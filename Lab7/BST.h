@@ -69,10 +69,6 @@ public:
     * in order
     */
     bool checkExists(Node *node, int val) const;
-    /*
-    * Returns BST as a string
-    */
-    // string BSTtoString(BST* tree) const {};
 
 protected:
     Node *root;
