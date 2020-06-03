@@ -35,72 +35,77 @@ bool BST::remove(int data) {
 };
 
 bool BST::recursiveRemove(Node*& node, int val) {
-    if (node == NULL || node->getData() == NULL) {
+    if (node == NULL) {
         return false;
-    } else if (node->data == val) {
-        Node* check = NULL;
-        if (node->getLeftChild()) {
-            check = node->leftChild;
-        }
-        if (check == NULL && node->getRightChild() == NULL) {
-            treeSize--;
-            delete node;
-            node = NULL;
-            return true;
-        } else if (check && node->getRightChild()) {
-            inOrder(check, node);
-            recursiveRemove(check, val);
-        } else if (check != NULL) {
-            treeSize--;
-            Node* temp = node;
-            node = node->getLeftChild();
-            delete temp;
-            temp = NULL;
-            return true;
-        } else if (check == NULL) {
-            treeSize--;
-            Node* temp = node;
-            node = node->getRightChild();
-            delete temp;
-            temp = NULL;
-            return true;
-        }
-    } else if (val < node->getData()) {
-        return recursiveRemove(node->leftChild, val);
-    } else if (val > node->getData()) {
-        return recursiveRemove(node->rightChild, val);
     } 
+    if (val < node->getData()) {
+        return recursiveRemove(node->leftChild, val);
+    }
+    if (val > node->getData()) {
+        return recursiveRemove(node->rightChild, val);
+    }
+    if (node->getLeftChild() == NULL && node->getRightChild() == NULL) {
+        treeSize--;
+        delete node;
+        node = NULL;
+        return true;
+    }
+    if (node->getLeftChild() && node->getRightChild()) {
+        // if (!node->getLeftChild()->getRightChild()) {
+        //     treeSize--;
+        //     Node* temp = node;
+        //     node = node->getLeftChild();
+        //     node->setRightChild(temp->getRightChild());
+        //     delete temp;
+        //     temp = NULL;
+        //     return true;
+        // } else {
+        //     treeSize--;
+        //     inOrder(node->leftChild, node);
+        //     return true;
+        // }
+        inOrder(node->leftChild, node);
+        return recursiveRemove(node->leftChild, val);
+    }
+    if (node->getLeftChild() && !node->getRightChild()) {
+        treeSize--;
+        Node* temp = node;
+        node = node->getLeftChild();
+        delete temp;
+        temp = NULL;
+        return true;
+    }
+    if (!node->getLeftChild() && node->getRightChild()) {
+        treeSize--;
+        Node* temp = node;
+        node = node->getRightChild();
+        delete temp;
+        temp = NULL;
+        return true;
+    }
+    return true;
 };
 
-void BST::inOrder(Node *node, Node *&parent)
-{
-    if (node == NULL && parent->rightChild == NULL)
-    {
-        parent == NULL;
-        return;
+void BST::inOrder(Node*& node, Node*& parent) {
+    Node *temp = node;
+    while (temp->getRightChild() != NULL) {
+        temp = temp->getRightChild();
     }
-    Node *temp = findRightMost(node);
-    int tData = parent->getData();
-    parent->setData(temp->data);
+    int tData = parent->data;
+    parent->setData(temp->getData());
     temp->setData(tData);
-};
-
-Node* BST::findRightMost(Node*& check) {
-    while(check->getRightChild()) {
-        check = check->getRightChild();
-    }
-    return check;
 };
 
 void BST::clear() {
     recursiveClear(this->root);
-    root = NULL;
-    delete root;
+    this->root = NULL;
 };
 
-void BST::recursiveClear(Node* root) {
-    if (root != NULL) {
-        recursiveClear(root->getLeftChild());
-        recursiveClear(root->getRightChild());
+void BST::recursiveClear(Node* n) {
+    if (n != NULL) {
+        recursiveClear(n->getLeftChild());
+        recursiveClear(n->getRightChild());
+        delete n;
+        n = NULL;
     }
 };

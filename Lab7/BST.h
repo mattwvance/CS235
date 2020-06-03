@@ -15,7 +15,7 @@ public:
     /*
     *
     */
-    void inOrder(Node* node, Node*& parent);
+    void inOrder(Node*& node, Node*& parent);
     /*
 	* Returns the root node for this tree
 	*
@@ -51,7 +51,7 @@ public:
     /*
     * Finds right most Node from local root
     */
-    Node* findRightMost(Node*& val);
+    Node*& findRightMost(Node*& val);
     /*
 	* Removes all nodes from the tree, resulting in an empty tree.
 	*/
