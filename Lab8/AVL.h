@@ -7,8 +7,8 @@ using namespace std;
 class AVL : public AVLInterface
 {
 public:
-    AVL() { root = NULL; };
-    virtual ~AVL() { this->clear(); };
+    AVL();
+    virtual ~AVL();
 
     //Please note that the class that implements this interface must be made
     //of objects which implement the NodeInterface
@@ -60,7 +60,21 @@ public:
     * clears the entire tree
     */
     void recursiveClear(Node *root);
-
+    /*
+    * rotates th left subtree
+    */
+    void rotateLeft(Node*& node);
+    /*
+    * rotates right subtree
+    */
+    void rotateRight(Node*& node);
+    /*
+    * rebalances tree
+    */
+   void rebalance(Node*& node);
+   
 protected:
     Node *root;
+    bool increased;
+    bool changed;
 };

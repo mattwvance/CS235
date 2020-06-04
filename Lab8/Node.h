@@ -49,4 +49,7 @@ protected:
 	int data;
 	Node *leftChild;
 	Node *rightChild;
+	int height;
+	int balance;
+	int increase;
 };

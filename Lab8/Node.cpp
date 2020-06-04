@@ -4,6 +4,9 @@ Node::Node(int value) {
     data = value;
     leftChild = NULL;
     rightChild = NULL;
+    height = 0;
+    balance = 0;
+    increase = 0;
 };
 
 Node::~Node() {};
@@ -35,5 +38,5 @@ void Node::setData(int val) {
 }
 
 int Node::getHeight() {
-
+    return height;
 };

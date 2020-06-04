@@ -4,6 +4,16 @@
 using namespace std;
 int treeSize = 0;
 
+AVL::AVL() {
+    root = NULL;
+    increased = false;
+    changed = false;
+};
+
+AVL::~AVL() {
+    this->clear();
+};
+
 Node * AVL::getRootNode() const {
     return root;
 };
@@ -13,25 +23,91 @@ int AVL::size() const {
 }
 
 bool AVL::add(const int data) {
-    return recursiveAdd(this->root, data);
+    increased = false;
+    bool added = recursiveAdd(this->root, data);
+    do {
+        changed = false;
+        rebalance(root);
+    } while (changed);
+    return added;
 };
 
 bool AVL::recursiveAdd(Node* &node, const int val) {
     if (node == NULL) {
         treeSize++;
         node = new Node(val);
+        increased = true;
         return true; 
-    } else if (node->getData() == val) {
+    } 
+    bool isAdded = false;
+    int currHeight = node->getHeight();
+    if (node->getData() == val) {
         return false;
     } else if (val < node->getData()) {
-        return recursiveAdd(node->leftChild, val);
+        isAdded = recursiveAdd(node->leftChild, val);
+        if (increased) {
+            --node->balance;
+            if (node->balance < -1) {
+                increased = false;
+                rotateLeft(node->leftChild);
+            }
+        }
     } else if (val > node->getData()) {
-        return recursiveAdd(node->rightChild, val);
+        isAdded = recursiveAdd(node->rightChild, val);
+        if (increased) {
+            ++node->balance;
+            if (node->balance > 1) {
+                increased = false;
+                rotateRight(node->rightChild);
+            }
+        }
+    }
+    return isAdded;
+};
+
+void AVL::rotateLeft(Node*& node) {
+    Node *pivot = node->getRightChild();
+    node->setRightChild(pivot->getLeftChild());
+    pivot->setLeftChild(node);
+    node = pivot;
+    --node->balance;
+    --node->getLeftChild()->balance;
+};
+
+void AVL::rotateRight(Node*& node) {
+    Node* pivot = node->getLeftChild();
+    node->setLeftChild(pivot->getRightChild());
+    pivot->setRightChild(node);
+    node = pivot;
+    ++node->balance;
+    ++node->getRightChild()->balance;
+};
+
+void AVL::rebalance(Node*& node) {
+    if (node == NULL) { return; }
+    rebalance(node->leftChild);
+    rebalance(node->rightChild);
+    if (node->balance < -1) {
+        if (node->getLeftChild()->balance == 1) {
+            rotateLeft(node->leftChild);
+        }
+        changed = true;
+    }
+    if (node->balance > 1) {
+        if (node->getRightChild()->balance == -1) {
+            rotateRight(node->rightChild);
+        }
+        changed = true;
     }
 };
 
 bool AVL::remove(int data) {
-    return recursiveRemove(this->root, data);
+    bool removed = recursiveRemove(this->root, data);
+    do {
+        changed = false;
+        rebalance(root);
+    } while (changed);
+    return removed;
 };
 
 bool AVL::recursiveRemove(Node*& node, int val) {
