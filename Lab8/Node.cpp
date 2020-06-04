@@ -40,3 +40,20 @@ void Node::setData(int val) {
 int Node::getHeight() {
     return height;
 };
+
+int Node::reset() {
+    if (!rightChild && !leftChild) {
+        balance = 0;
+        height = 1;
+    } else if (!rightChild) {
+        height = leftChild->reset() + 1;
+        balance = 0 - leftChild->getHeight();
+    } else if (!leftChild) {
+        height = rightChild->reset() + 1;
+        balance = rightChild->getHeight();
+    } else {
+        height = max(leftChild->reset(), rightChild->reset()) + 1;
+        balance = rightChild->getHeight() - leftChild->getHeight();
+    }
+    return height;
+}

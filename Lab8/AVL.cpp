@@ -27,6 +27,9 @@ bool AVL::add(const int data) {
     bool added = recursiveAdd(this->root, data);
     do {
         changed = false;
+        if (root != NULL) {
+            root->reset();
+        }
         rebalance(root);
     } while (changed);
     return added;
@@ -41,24 +44,37 @@ bool AVL::recursiveAdd(Node* &node, const int val) {
     } 
     bool isAdded = false;
     int currHeight = node->getHeight();
+    //cout << currHeight << endl;
     if (node->getData() == val) {
         return false;
     } else if (val < node->getData()) {
         isAdded = recursiveAdd(node->leftChild, val);
         if (increased) {
             --node->balance;
+            //cout << val << "getting left" << node->balance << node->getLeftChild()->balance << endl;
             if (node->balance < -1) {
+                if (node->getLeftChild()->balance > 0 ) { //}== 1) {
+                    rotateLeft(node->leftChild);
+                }
                 increased = false;
-                rotateLeft(node->leftChild);
+                rotateRight(node);
+            } else if (node->balance == 0) {
+                increased = false;
             }
         }
     } else if (val > node->getData()) {
         isAdded = recursiveAdd(node->rightChild, val);
+        //cout << val << "getting right" << node->balance << node->getRightChild()->balance << endl;
         if (increased) {
             ++node->balance;
             if (node->balance > 1) {
+                if (node->getRightChild()->balance < 0) {
+                    rotateRight(node->rightChild);
+                }
+                rotateLeft(node);
                 increased = false;
-                rotateRight(node->rightChild);
+            } else if (node->balance == 0) {
+                increased = false;
             }
         }
     }
@@ -85,18 +101,20 @@ void AVL::rotateRight(Node*& node) {
 
 void AVL::rebalance(Node*& node) {
     if (node == NULL) { return; }
-    rebalance(node->leftChild);
-    rebalance(node->rightChild);
+    if (node->getLeftChild()) { rebalance(node->leftChild); }
+    if (node->getRightChild()) { rebalance(node->rightChild); }
     if (node->balance < -1) {
         if (node->getLeftChild()->balance == 1) {
             rotateLeft(node->leftChild);
         }
+        rotateRight(node);
         changed = true;
     }
     if (node->balance > 1) {
         if (node->getRightChild()->balance == -1) {
             rotateRight(node->rightChild);
         }
+        rotateLeft(node);
         changed = true;
     }
 };
@@ -105,6 +123,9 @@ bool AVL::remove(int data) {
     bool removed = recursiveRemove(this->root, data);
     do {
         changed = false;
+        if (root != NULL) {
+            root->reset();
+        }
         rebalance(root);
     } while (changed);
     return removed;

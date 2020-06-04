@@ -45,6 +45,8 @@ public:
 
 	int getHeight();
 
+	int reset();
+
 protected:
 	int data;
 	Node *leftChild;
