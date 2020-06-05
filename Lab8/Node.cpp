@@ -6,7 +6,6 @@ Node::Node(int value) {
     rightChild = NULL;
     height = 0;
     balance = 0;
-    increase = 0;
 };
 
 Node::~Node() {};

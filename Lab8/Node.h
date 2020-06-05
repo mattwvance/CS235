@@ -53,5 +53,4 @@ protected:
 	Node *rightChild;
 	int height;
 	int balance;
-	int increase;
 };
