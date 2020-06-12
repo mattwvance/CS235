@@ -24,33 +24,33 @@ insert abalones 600
 [] abandoned 600
 insert abandoner 600
 insert abaft 3
-get abaft 0
-size 25
+get abaft 3
+size 22
 contains Aaron true
 remove Aaron true
-size 25
-get abacus 0
+size 21
+get abacus 600
 [] abaacus
 remove abacus true
-get abacus 0
-size 26
-remove zelda true
-size 26
-contains abacus true
+get abacus invalid_argument
+size 21
+remove zelda false
+size 21
+contains abacus false
 insert abacus 6000
-get abacus 0
+get abacus 6000
 insert abacus 6002
-get abacus 0
+get abacus 6002
 contains abacus true
 [] abacus 3
 [] abacus
 contains abaft true
-contains zelda true
-contains Aaron true
+contains zelda false
+contains Aaron false
 clear
-size 30
-contains Aachen true
-contains Aaron true
+size 0
+contains Aachen false
+contains Aaron false
 [] Ayckbourn 600
 [] Ayckbourns 600
 [] aye 600
@@ -86,31 +86,31 @@ insert Aztecan 600
 [] Aztecs 600
 [] azure 600
 [] azures 600
-size 65
+size 32
 remove Aziz true
-size 65
+size 31
 remove Ayr true
-size 65
+size 30
 remove Azeri true
-size 65
+size 29
 contains azalea true
-remove bob true
-remove slob true
-remove rob true
-remove mob true
-remove dob true
-remove asov true
+remove bob false
+remove slob false
+remove rob false
+remove mob false
+remove dob false
+remove asov false
 remove azalea true
-remove cheese true
+remove cheese false
 contains Azov true
-contains Aziz true
-contains Ayr true
-contains Azeri true
-contains Aaron true
-contains azalea true
-size 65
+contains Aziz false
+contains Ayr false
+contains Azeri false
+contains Aaron false
+contains azalea false
+size 28
 clear
-size 65
+size 0
 insert allusive 1
 insert allusively 1
 insert allusiveness 1
@@ -137,14 +137,14 @@ insert allying 1
 [] almonds 1
 [] almoner 1
 [] almonds
-get Alma 0
+get Alma 1
 [] Alma
 contains Alma true
 insert Alma 42
-get Alma 0
+get Alma 42
 remove Alma true
-get Alma 0
-contains Alma true
+get Alma invalid_argument
+contains Alma false
 clear
 insert almoners 1
 insert almoners 1
@@ -160,9 +160,9 @@ insert almsmens 1
 insert alnico 1
 insert aloe 1
 insert aloes 1
-size 107
+size 12
 remove alnico true
-size 107
+size 11
 clear
 insert aloes 1
 insert Alofi 1
@@ -4798,12 +4798,12 @@ insert Azores 1
 insert Azov 1
 insert Aztec 1
 insert Aztecan 1
-size 4741
+size 4028
 contains Aztec true
-get Aztec 0
+get Aztec 1
 remove Aztec true
-get Aztec 0
+get Aztec invalid_argument
 clear
-size 4741
-contains azimuth true
-get azimuth 0
+size 0
+contains azimuth false
+get azimuth invalid_argument

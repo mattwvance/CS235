@@ -23,22 +23,22 @@ size 0
 [] abandon 1
 [] abandoned 1
 [] abandoner 1
-size 24
+size 22
 contains Aaron true
 remove Aaron true
-size 24
+size 21
 remove abacus true
-size 24
-remove zelda true
-size 24
-contains abacus true
+size 20
+remove zelda false
+size 20
+contains abacus false
 contains abaft true
-contains zelda true
-contains Aaron true
+contains zelda false
+contains Aaron false
 clear
-size 24
-contains Aachen true
-contains Aaron true
+size 0
+contains Aachen false
+contains Aaron false
 [] Ayckbourn 1
 [] Ayckbourns 1
 [] aye 1
@@ -74,25 +74,25 @@ contains Aaron true
 [] Aztecs 1
 [] azure 1
 [] azures 1
-size 59
+size 32
 remove Aziz true
-size 59
+size 31
 remove Ayr true
-size 59
+size 30
 remove Azeri true
-size 59
+size 29
 contains azalea true
-remove bob true
-remove slob true
-remove rob true
-remove mob true
-remove dob true
-remove asov true
+remove bob false
+remove slob false
+remove rob false
+remove mob false
+remove dob false
+remove asov false
 remove azalea true
-remove cheese true
+remove cheese false
 contains Azov true
-contains Aziz true
-contains Ayr true
-contains Azeri true
-contains Aaron true
-contains azalea true
+contains Aziz false
+contains Ayr false
+contains Azeri false
+contains Aaron false
+contains azalea false

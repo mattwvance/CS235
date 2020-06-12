@@ -72,7 +72,6 @@ private:
 			sum += p[i];
 		}
 		hashCode = sum % BUCKETS;
-		cout << hashCode << p << sum << endl;
 		return hashCode;
 	};
 public:

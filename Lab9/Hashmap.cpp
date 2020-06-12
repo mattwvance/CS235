@@ -13,33 +13,37 @@ Hashmap::~Hashmap() {
 };
 
 void Hashmap::insert(string key, int value) {
-    cout << "inserting" << endl;
     unsigned int location = hash(key);
-    Node *node = new Node;
+    Node *node = new Node();
     node->key = key;
     node->value = value;
+    node->next = NULL;
+    node->prev = NULL;
     if (buckets[location] == NULL) {
-        cout << mapSize << endl;
         ++mapSize;
         buckets[location] = node;
     } else {
         if (contains(key)) {
-            int val = get(key);
-            val += value;
+            Node *find = buckets[location];
+            while (find->key != key) {
+                find = find->next;
+            }
+            find->value = value;
+            delete node;
+            node = NULL;
         } else {
             Node *find = buckets[location];
             while (find->next != NULL) {
                 find = find->next;
             }
-            ++mapSize;
+            node->prev = find;
             find->next = node;
+            ++mapSize;
         }
     }
-    cout <<key <<  mapSize << endl;
 };
 
 bool Hashmap::contains(string key) const {
-    cout << "in contains" << endl;
     bool isThere = false;
     unsigned int location = hash(key);
     Node* find = buckets[location];
@@ -53,12 +57,17 @@ bool Hashmap::contains(string key) const {
 };
 
 int Hashmap::get(string key) const {
-    cout << "getting stuff" << endl;
     int location = hash(key);
     Node* find = buckets[location];
-    while (find->key != key) {
-        cout << find->key << endl;
-        find = find->next;
+    if (buckets[location] != NULL) {
+        while (find->key != key) {
+            if (find->next == NULL) {
+                throw std::invalid_argument("key");
+            }
+            find = find->next;
+        }
+    } else {
+        throw std::invalid_argument("key");
     }
     int val = find->value;
     return val;
@@ -97,21 +106,74 @@ int& Hashmap::operator [](string key) {
 };
 
 bool Hashmap::remove(string key) {
-    cout << "removing" << endl;
-    return true;
+    unsigned int location = hash(key);
+    Node* find = buckets[location];
+    if (contains(key)) {
+        while (find->key != key) {
+            find = find->next;
+        }
+        Node *prev = find->prev;
+        Node* next = find->next;
+        if (prev == NULL) {
+            buckets[location] = next;
+        } else {
+            prev->next = next;
+        }
+        if (next != NULL) {
+            next->prev = prev;
+        }
+        delete find;
+        find = NULL;
+        // if (find->key != key) {
+        //     while (find->key != key) {
+        //         if (find->next == NULL) {
+        //             return false;
+        //         }
+        //         find = find->next;
+        //     }
+        //     Node *toDelete = find->next;
+        //     find->next = toDelete->next;
+        //     delete toDelete;
+        //     toDelete = NULL;
+        // } else {
+        //     buckets[location] = find->next;
+        //     find->next->prev = NULL;
+        //     delete find;
+        //     find = NULL;
+        // }
+        --mapSize;
+        return true;
+    } else {
+        return false;
+    }
 };
 
 void Hashmap::clear() {
-    cout << "clearing" << endl;
+    for (unsigned int i = 0; i < BUCKETS; ++i) {
+        while (buckets[i] != NULL) {
+            remove(buckets[i]->key);
+        }
+    //     if (buckets[i] != NULL) {
+    //         Node *find = buckets[i];
+    //         Node *temp = NULL;
+    //         while (find->next != NULL) {
+    //             temp = find;
+    //             find = temp->next;
+    //             remove(temp->key);
+    //             temp = NULL;
+    //         }
+    //         remove(find->key);
+    //     }
+    //     buckets[i] = NULL;
+    }
+    mapSize = 0;
 };
 
 string Hashmap::toString() const {
-    cout << "converting to a string" << endl;
     return "";
 };
 
 int Hashmap::size() const {
-    cout << "finding size" << endl;
     return mapSize;
 };
 
@@ -120,7 +182,11 @@ string Hashmap::toSortedString() const {
     priority_queue<Node *, vector<Node *>, NodeCompare> nodeHeap;
     for (int i = 0; i < BUCKETS; i++) {
         // Iterate through each bucket. Use nodeHeap.push to push all Node* onto heap.
-        nodeHeap.push(buckets[i]);
+        Node* add = buckets[i];
+        while (add != NULL) {
+            nodeHeap.push(add);
+            add = add->next;
+        }
     }
     while (!nodeHeap.empty()) {
         Node *top = nodeHeap.top();
