@@ -1,0 +1,6 @@
+size 0
+[] apple 3
+size 1
+[] apple
+get apple 3
+size 1

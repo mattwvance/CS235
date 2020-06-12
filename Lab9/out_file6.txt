@@ -1,0 +1,24 @@
+WordCounter 1Nephi.txt
+of => 115
+I => 54
+Nephi => 9
+been => 7
+nevertheless => 2
+therefore => 2
+goodly => 1
+having => 1
+having => 1
+taught => 1
+
+WordCounter harry_potter_book_1.txt
+the => 360
+and => 192
+Harry => 107
+Mr => 11
+Potter => 11
+Stone => 7
+Privet => 2
+THE => 2
+BOY => 1
+WHO => 1
+

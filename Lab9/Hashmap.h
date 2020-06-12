@@ -64,7 +64,17 @@ private:
 	 *  This can be done by generating a hash code and returning "hashcode % BUCKETS"
 	 *  Try to make your hash function so that the distribution is uniform over all buckets
 	 */
-	unsigned int hash(string key) const;
+	unsigned int hash(string key) const {
+		unsigned char *p = (unsigned char *)key.c_str();
+		int sum = 0;
+		unsigned int hashCode = 0;
+		for (int i = 0; i < key.size(); i++) {
+			sum += p[i];
+		}
+		hashCode = sum % BUCKETS;
+		cout << hashCode << p << sum << endl;
+		return hashCode;
+	};
 public:
 	Hashmap();
 	~Hashmap();
